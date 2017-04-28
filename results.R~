@@ -1,0 +1,11 @@
+	library(matrixStats); 
+	#install.packages('matrixStats');
+	
+	gens = read.table("results.all");
+	alldata = subset(gens, select=V1:V50)
+	
+	gens$means 	<- rowMeans(alldata, na.rm = TRUE);
+	gens$std 	<- transform(alldata, SD=rowSds(alldata, na.rm=TRUE))
+	gens$std 	<- rowSds(alldata, na.rm=TRUE)
+	write.table(subset(gens, select=c(means,std)), file = "results.sum", sep = " ");
+	write.table(subset(gens, select=c(means)), file = "results.sum", sep = " ");
